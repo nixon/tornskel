@@ -16,7 +16,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.write(json_decode({'status':'fail', 'reason': reason}))
 
     def _yield_continue(self, response=None):
-        # by sending the response to the generator, we can treat it as a 
+        # by sending the response to the generator, we can treat it as a
         # yield expression and do stuff like x= yield async_fun(..)
         # This takes the place of a .next() on the generator.
         try: self._yield_iter.send(response)
@@ -121,10 +121,10 @@ def async_yield(f):
         try:
             self._yield_iter.next()
         except AttributeError:
-            # soem codepaths in a handler may not actually execute a yield.
+            # some codepaths in a handler may not actually execute a yield.
             # This causes python to not create a generator.  This means a
             # .next() call throws an AttributeError Exception.  We can just
-            # move past it 
+            # move past it
             pass
     return yielding_asynchronously
 
